@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import uploadFastq from '../fetchAPI/uploadFASTQ'
+import createSample from '../fetchAPI/sampleHandler'
 import { Page, Navbar, ImportFileForm, CheckBoxList, CheckBoxContainer } from '../components/SampleCreation'
 import FileSelector from '../components/FileSelector'
 
@@ -19,7 +19,7 @@ function ProjectPage() {
   console.log(selectedGenes, isSRA)
 
   const onUpload = (files) => {
-    uploadFastq(files, Object.keys(selectedGenes).filter((gene) => selectedGenes[gene]).map((gene) => gene), isSRA)
+    createSample(files, Object.keys(selectedGenes).filter((gene) => selectedGenes[gene]).map((gene) => gene), isSRA)
   }
 
   return (
