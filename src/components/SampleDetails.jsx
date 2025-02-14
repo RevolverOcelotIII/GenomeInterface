@@ -39,7 +39,7 @@ function SampleDetails({ sample }) {
   useEffect(() => {
     getSampleInfo(sample.uuid).then((sampleInfo) => {
       setProcessedSampleData(sampleInfo);
-      setSelectedGene(Object.keys(sampleInfo)[0]);
+      setSelectedGene(Object.keys(sampleInfo || {})[0]);
     });
   }, [sample]);
 
@@ -73,7 +73,7 @@ function SampleDetails({ sample }) {
               </TableRow>
             </TableHeader>
             <tbody>
-              {processedSampleData[selectedGene]?.phenotypes.map(
+              {processedSampleData[selectedGene]?.phenotypes.sort((a, b) => a.classification.localeCompare(b.classification)).map(
                 (phenotype, index) => (
                   <TableRow>
                     <TableData>{index + 1}</TableData>
